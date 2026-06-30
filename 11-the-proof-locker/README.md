@@ -10,7 +10,7 @@
 
 The "tidy preview endpoint" is `GET /api/reviews/proof?proof=<path>`. It's
 meant to serve previews of uploaded proof files (the same files mentioned
-in the review-submission allow-list from [The Proof Stamp](09-the-proof-stamp.md)).
+in the review-submission allow-list from [The Proof Stamp](../09-the-proof-stamp/README.md)).
 The `proof=` parameter is dropped into a server filesystem path without
 sanitisation, so `..` segments escape the proof root and you can read
 arbitrary files the Node process can `fs.readFile`.

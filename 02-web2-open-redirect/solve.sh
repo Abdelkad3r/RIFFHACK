@@ -11,7 +11,7 @@ set -euo pipefail
 HOST="${1:-159.89.230.27}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 # shellcheck disable=SC1091
-source "$HERE/lib/login.sh"
+source "$HERE/../lib/login.sh"
 
 echo "[*] web2 (open redirect) against $HOST"
 

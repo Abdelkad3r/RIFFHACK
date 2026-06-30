@@ -80,7 +80,7 @@ curl -s -b "$COOKIE" --data-urlencode \
 ```
 
 The `internalNote` projection contains the flag verbatim. This is also how
-I first found the value during the [web5](05-web5-glitchy-contact-system.md)
+I first found the value during the [web5](../05-web5-glitchy-contact-system/README.md)
 hunt, where it was a *decoy*. Same value, opposite role between the two
 challenges.
 
@@ -132,7 +132,7 @@ Two problems:
 This is the third instance of "same string, real here, decoy somewhere
 else" in the event suite. The value `bitflag{3xp0rts_sh0uld_n0t_b3_0p3n_b00ks}`:
 
-- Is a **decoy** for [web5 — Glitchy Contact System](05-web5-glitchy-contact-system.md):
+- Is a **decoy** for [web5 — Glitchy Contact System](../05-web5-glitchy-contact-system/README.md):
   the SQLi pivot into `internalNote` produces it, but web5's brief points
   at a different surface, so it was the wrong answer there.
 - Is the **real flag** for *this* challenge: the brief explicitly points at

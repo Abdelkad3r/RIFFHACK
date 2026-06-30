@@ -163,7 +163,7 @@ token from a `PUT /api/token` call, specifically to break SSRF into it.
 
 This is the sixth time in the event suite that a flag-shaped value flips
 between decoy and real depending on the brief. On
-[web5 — Glitchy Contact System](05-web5-glitchy-contact-system.md) the
+[web5 — Glitchy Contact System](../05-web5-glitchy-contact-system/README.md) the
 exact same string is one of the four decoys — reached via the IMDS
 user-data SSRF, but the wrong answer for that brief. Here, the brief
 *names* the env var, so the same SSRF surfaces it as the real answer.

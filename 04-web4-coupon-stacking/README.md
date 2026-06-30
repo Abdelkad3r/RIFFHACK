@@ -150,7 +150,7 @@ distraction.
 - Six listings, one is vulnerable. The recon move — figuring out which
   listing renders the checkout flow at all — is a useful muscle. Don't
   assume every page in a route group is the same.
-- This is the same class of bug as [web5](05-web5-glitchy-contact-system.md).
+- This is the same class of bug as [web5](../05-web5-glitchy-contact-system/README.md).
   Both put a win-state secret into a React server prop and let the framework
   leak it into the HTML.
 

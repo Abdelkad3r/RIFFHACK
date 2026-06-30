@@ -152,10 +152,10 @@ That is the entire exploit.
 | Decoy value | Real flag for |
 |---|---|
 | `bitflag{w3bs0ck3t_upgr4d3_ssrf_2026}` | (unflipped — no public challenge yet) |
-| `bitflag{ssrf_1s_4_p4rty_cr4sh3r}` | [The Trusting Verifier](10-the-trusting-verifier.md) |
-| `bitflag{3xp0rts_sh0uld_n0t_b3_0p3n_b00ks}` | [The Night Dump](08-the-night-dump.md) |
+| `bitflag{ssrf_1s_4_p4rty_cr4sh3r}` | [The Trusting Verifier](../10-the-trusting-verifier/README.md) |
+| `bitflag{3xp0rts_sh0uld_n0t_b3_0p3n_b00ks}` | [The Night Dump](../08-the-night-dump/README.md) |
 | `bitflag{jwt_5h4ll_n0t_p455}` | boroCTF "Vendor's Secret Door" |
-| `bitflag{md5_1s_br0k3n_l1k3_my_h34rt}` | [The Proof Stamp](09-the-proof-stamp.md) |
+| `bitflag{md5_1s_br0k3n_l1k3_my_h34rt}` | [The Proof Stamp](../09-the-proof-stamp/README.md) |
 
 Treat the "decoy" label as scoped to *this* challenge only. Across the suite,
 nearly every decoy turns out to be someone else's real answer.

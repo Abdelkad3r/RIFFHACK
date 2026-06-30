@@ -63,7 +63,7 @@ Two pieces of intel:
 
 1. The target row id is `seed-phantom-hacker`.
 2. The seed row's owner is `userId = k7m3n`. **Remember this name** — it's
-   the breadcrumb that unlocks [web7](07-web7-orders-jwt-idor.md).
+   the breadcrumb that unlocks [web7](../07-web7-orders-jwt-idor/README.md).
 
 ## Exploitation
 
@@ -115,7 +115,7 @@ If you POST a *new* review (instead of PUT-ing the seed), the server stamps a
 **different** value into `fileHash` —
 `bitflag{md5_1s_br0k3n_l1k3_my_h34rt}` — which looks like the flag but is
 the **planted decoy** for *this* challenge. It is the *real* flag for "The
-Proof Stamp" (see [09](09-the-proof-stamp.md)). On web6, the seed row's
+Proof Stamp" (see [09](../09-the-proof-stamp/README.md)). On web6, the seed row's
 `fileHash` is a normal MD5 — distinguishing the seed row from any user-created
 decoy is itself a useful tell that you're on the right row.
 

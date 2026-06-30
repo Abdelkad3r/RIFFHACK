@@ -37,7 +37,7 @@ right answer for web7:
 
 All four of these are the *real* answer for *some* riffhack-codebase
 challenge in the wider event suite. See the decoy table in
-[web5](05-web5-glitchy-contact-system.md) for the full mapping.
+[web5](../05-web5-glitchy-contact-system/README.md) for the full mapping.
 
 ## The real path
 

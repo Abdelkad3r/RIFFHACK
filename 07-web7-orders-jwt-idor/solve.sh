@@ -15,7 +15,7 @@ set -euo pipefail
 HOST="${1:-159.89.230.27}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 # shellcheck disable=SC1091
-source "$HERE/lib/jwt-none.sh"
+source "$HERE/../lib/jwt-none.sh"
 
 echo "[*] web7 (orders IDOR via alg:none JWT) against $HOST"
 

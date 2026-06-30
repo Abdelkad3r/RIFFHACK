@@ -133,7 +133,7 @@ Three layered failures:
 ## Cross-event note — the decoy↔real flip, again
 
 This is the fourth time in the event suite that a flag-shaped value is
-*real here, decoy somewhere else*. On [web6](06-web6-review-idor.md) the
+*real here, decoy somewhere else*. On [web6](../06-web6-review-idor/README.md) the
 same string is the planted decoy — the `fileHash` value on user-created
 review rows that walks the wrong-instinct solver down the "MD5 collision"
 path. On this challenge, "The Proof Stamp", the brief points directly at

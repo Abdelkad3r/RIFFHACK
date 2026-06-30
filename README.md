@@ -7,7 +7,9 @@ plants its bug somewhere in that codebase, and the flag format is `bitflag{...}`
 (single braces — not to be confused with bitctf's literal-doubled `bitctf{{...}}`).
 
 Eleven challenges are solved and documented here, in roughly the order I worked
-through them.
+through them. Each challenge gets its own folder containing the writeup
+(`README.md`), a runnable solver (`solve.sh`), and — where I captured anything
+worth keeping — an `artifacts/` directory with the raw exploit output.
 
 ## Contents
 
@@ -15,22 +17,22 @@ through them.
 
 | # | Challenge | Class | Flag |
 |---|-----------|-------|------|
-| 1 | [Robots.txt Courtesy](01-web1-robots-txt.md) | Recon | `bitflag{r0b0ts_4r3_n0t_4_s3cr3t_v4ult}` |
-| 2 | [The Trusting Login Desk](02-web2-open-redirect.md) | Open redirect → token leak | `bitflag{tru5t3d_r3d1r3cts_c4n_c4rry_s3cr3ts}` |
-| 3 | [Buyer Lookup Loose Query](03-web3-sqli-orders-lookup.md) | SQL injection | `bitflag{1nj3ct10n_turn5_4_l00kup_1nt0_4_l34k}` |
-| 4 | [Coupon Stacking](04-web4-coupon-stacking.md) | SSR prop leak | `bitflag{c0up0n_st4ck1ng_1s_4_d34l}` |
-| 5 | [The Glitchy Contact System](05-web5-glitchy-contact-system.md) | SSR prop leak via error throw | `bitflag{d3bug_m0d3_1s_d4ng3r0us}` |
-| 6 | [Marketplace Reviews Look Tidy](06-web6-review-idor.md) | IDOR (URL-path id) | `bitflag{r3v13w_0wn3r5h1p_1s_n0t_4_sugg35t10n}` |
-| 7 | [Order History Should Be Private](07-web7-orders-jwt-idor.md) | JWT `alg:none` + IDOR | `bitflag{1d0r_1s_4_d4ng3r0us_g4m3}` |
+| 1 | [Robots.txt Courtesy](01-web1-robots-txt/README.md) | Recon | `bitflag{r0b0ts_4r3_n0t_4_s3cr3t_v4ult}` |
+| 2 | [The Trusting Login Desk](02-web2-open-redirect/README.md) | Open redirect → token leak | `bitflag{tru5t3d_r3d1r3cts_c4n_c4rry_s3cr3ts}` |
+| 3 | [Buyer Lookup Loose Query](03-web3-sqli-orders-lookup/README.md) | SQL injection | `bitflag{1nj3ct10n_turn5_4_l00kup_1nt0_4_l34k}` |
+| 4 | [Coupon Stacking](04-web4-coupon-stacking/README.md) | SSR prop leak | `bitflag{c0up0n_st4ck1ng_1s_4_d34l}` |
+| 5 | [The Glitchy Contact System](05-web5-glitchy-contact-system/README.md) | SSR prop leak via error throw | `bitflag{d3bug_m0d3_1s_d4ng3r0us}` |
+| 6 | [Marketplace Reviews Look Tidy](06-web6-review-idor/README.md) | IDOR (URL-path id) | `bitflag{r3v13w_0wn3r5h1p_1s_n0t_4_sugg35t10n}` |
+| 7 | [Order History Should Be Private](07-web7-orders-jwt-idor/README.md) | JWT `alg:none` + IDOR | `bitflag{1d0r_1s_4_d4ng3r0us_g4m3}` |
 
 ### Named challenges (cross-event / extended track)
 
 | # | Challenge | Class | Flag |
 |---|-----------|-------|------|
-| 8 | [The Night Dump](08-the-night-dump.md) | Over-scoped diagnostic export | `bitflag{3xp0rts_sh0uld_n0t_b3_0p3n_b00ks}` |
-| 9 | [The Proof Stamp](09-the-proof-stamp.md) | Server-stamped fake-proof | `bitflag{md5_1s_br0k3n_l1k3_my_h34rt}` |
-| 10 | [The Trusting Verifier](10-the-trusting-verifier.md) | SSRF → IMDS user-data | `bitflag{ssrf_1s_4_p4rty_cr4sh3r}` |
-| 11 | [The Proof Locker](11-the-proof-locker.md) | Path traversal → LFI | `bitflag{pr00f_p4ths_5h0uld_st4y_1n_b0unds}` |
+| 8 | [The Night Dump](08-the-night-dump/README.md) | Over-scoped diagnostic export | `bitflag{3xp0rts_sh0uld_n0t_b3_0p3n_b00ks}` |
+| 9 | [The Proof Stamp](09-the-proof-stamp/README.md) | Server-stamped fake-proof | `bitflag{md5_1s_br0k3n_l1k3_my_h34rt}` |
+| 10 | [The Trusting Verifier](10-the-trusting-verifier/README.md) | SSRF → IMDS user-data | `bitflag{ssrf_1s_4_p4rty_cr4sh3r}` |
+| 11 | [The Proof Locker](11-the-proof-locker/README.md) | Path traversal → LFI | `bitflag{pr00f_p4ths_5h0uld_st4y_1n_b0unds}` |
 
 ## A word on style
 
@@ -86,50 +88,72 @@ partly so future-me can see why I didn't just walk straight to the answer.
 
 ```
 RIFFHACK/
-├── README.md                          ← you are here
-├── 01-web1-robots-txt.md              ← writeups, in solve order
-├── …
-├── 11-the-proof-locker.md
-├── scripts/                           ← runnable solver per challenge
-│   ├── lib/
-│   │   ├── login.sh                   ← get an auth-token cookie (any creds)
-│   │   └── jwt-none.sh                ← forge an alg:none JWT
-│   ├── solve-web1-robots.sh
-│   ├── solve-web2-open-redirect.sh
-│   ├── solve-web3-sqli.sh
-│   ├── solve-web4-coupon.sh
-│   ├── solve-web5-glitchy-contact.sh
-│   ├── solve-web6-review-idor.sh
-│   ├── solve-web7-orders-jwt.sh
-│   ├── solve-night-dump.sh
-│   ├── solve-proof-stamp.sh
-│   ├── solve-trusting-verifier.sh
-│   ├── solve-proof-locker.sh
-│   └── solve-all.sh                   ← run every solver, summarise flags
-└── artifacts/                         ← captures referenced by the writeups
+├── README.md                              ← you are here
+├── solve-all.sh                           ← run every solver, summarise flags
+├── lib/
+│   ├── login.sh                           ← get an auth-token cookie (any creds)
+│   └── jwt-none.sh                        ← forge an alg:none JWT
+├── 01-web1-robots-txt/
+│   ├── README.md                          ← writeup
+│   └── solve.sh
+├── 02-web2-open-redirect/
+│   ├── README.md
+│   └── solve.sh
+├── 03-web3-sqli-orders-lookup/
+│   ├── README.md
+│   ├── solve.sh
+│   └── artifacts/
+│       ├── db-schema.sql                  ← recovered via sqlite_master SQLi
+│       └── orders-table-dump.json
+├── 04-web4-coupon-stacking/
+│   ├── README.md
+│   └── solve.sh
+├── 05-web5-glitchy-contact-system/
+│   ├── README.md
+│   └── solve.sh
+├── 06-web6-review-idor/
+│   ├── README.md
+│   ├── solve.sh
+│   └── artifacts/
+│       └── review-table-dump.json         ← seed Reviews (web7 pivot too)
+├── 07-web7-orders-jwt-idor/
+│   ├── README.md
+│   └── solve.sh
+├── 08-the-night-dump/
+│   ├── README.md
+│   ├── solve.sh
+│   └── artifacts/
+│       └── support-chat-dump.json
+├── 09-the-proof-stamp/
+│   ├── README.md
+│   └── solve.sh
+├── 10-the-trusting-verifier/
+│   ├── README.md
+│   ├── solve.sh
+│   └── artifacts/
+│       ├── imds-user-data.sh              ← Trusting Verifier flag (env var)
+│       └── imds-iam-credentials.json      ← bonus Token field (unflipped decoy)
+└── 11-the-proof-locker/
     ├── README.md
-    ├── db-schema.sql                  ← recovered via web3 SQLi on sqlite_master
-    ├── orders-table-dump.json
-    ├── review-table-dump.json
-    ├── support-chat-dump.json
-    ├── etc-passwd-leak.txt            ← Proof Locker LFI capture
-    ├── imds-user-data.sh              ← Trusting Verifier SSRF capture
-    └── imds-iam-credentials.json      ← bonus IMDS Token field (unflipped decoy)
+    ├── solve.sh
+    └── artifacts/
+        └── etc-passwd-leak.txt            ← opsflag GECOS line at bottom
 ```
 
-### Running a solver
+## Running
 
 ```bash
 # Single challenge
-./scripts/solve-web3-sqli.sh 159.89.230.27
+./03-web3-sqli-orders-lookup/solve.sh 159.89.230.27
 
-# Everything against one host
-./scripts/solve-all.sh 159.89.230.27
+# Every challenge against one host
+./solve-all.sh 159.89.230.27
 ```
 
-Most scripts default to `159.89.230.27` if no host is supplied; the named-
-challenge solvers (Night Dump, Proof Stamp, Trusting Verifier, Proof Locker)
-have a fallback path to the web3 SQLi pivot in case the intended endpoint is
-unhealthy on the deployment you're testing against.
+Most solvers default to `159.89.230.27` if no host is supplied. The named-
+challenge solvers (Night Dump, Proof Stamp) include a fallback to the web3
+SQLi pivot in case the intended endpoint is unhealthy on the deployment
+you're testing against.
 
-Each script prints the flag it recovered on the last line, prefixed `[+] FLAG:`.
+Every script prints the recovered flag on the last line, prefixed
+`[+] FLAG: bitflag{...}`.
