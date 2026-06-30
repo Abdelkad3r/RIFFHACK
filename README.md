@@ -1,15 +1,16 @@
-# RIFFHACK — Web Challenge Writeups
+# RIFFHACK - Challenge Writeups
 
-These are my writeups for the **riffhack** event — a CTF built around a fictional
-Next.js "exploit kit marketplace" called *riffhack // exploit kit marketplace*. The
-site is themed as a darknet storefront for offensive tooling. Every challenge
-plants its bug somewhere in that codebase, and the flag format is `bitflag{...}`
-(single braces — not to be confused with bitctf's literal-doubled `bitctf{{...}}`).
+These are my writeups for the **riffhack** event - mostly centered on a
+fictional Next.js "exploit kit marketplace" called *riffhack // exploit kit
+marketplace*. The site is themed as a darknet storefront for offensive tooling.
+The core web track uses the `bitflag{...}` format. The escrow-terminal addendum
+keeps its original `bitctf{{...}}` flag format because it came from the
+RIFFHACK-branded binary challenge set.
 
-Eleven challenges are solved and documented here, in roughly the order I worked
+Twelve confirmed solves are documented here, in roughly the order I worked
 through them. Each challenge gets its own folder containing the writeup
-(`README.md`), a runnable solver (`solve.sh`), and — where I captured anything
-worth keeping — an `artifacts/` directory with the raw exploit output.
+(`README.md`), a runnable solver, and - where I captured anything worth keeping -
+an `artifacts/` directory with the raw exploit output or original handout.
 
 ## Contents
 
@@ -33,6 +34,12 @@ worth keeping — an `artifacts/` directory with the raw exploit output.
 | 9 | [The Proof Stamp](09-the-proof-stamp/README.md) | Server-stamped fake-proof | `bitflag{md5_1s_br0k3n_l1k3_my_h34rt}` |
 | 10 | [The Trusting Verifier](10-the-trusting-verifier/README.md) | SSRF → IMDS user-data | `bitflag{ssrf_1s_4_p4rty_cr4sh3r}` |
 | 11 | [The Proof Locker](11-the-proof-locker/README.md) | Path traversal → LFI | `bitflag{pr00f_p4ths_5h0uld_st4y_1n_b0unds}` |
+
+### Binary exploitation addendum
+
+| # | Challenge | Class | Flag |
+|---|-----------|-------|------|
+| 12 | [RIFFHACK Escrow Terminal](12-riffhack-escrow-terminal/README.md) | Format string -> pointer swap | `bitctf{{35cr0w_n0735_wr173_th3_ch3ck}}` |
 
 ## A word on style
 
@@ -133,11 +140,16 @@ RIFFHACK/
 │   └── artifacts/
 │       ├── imds-user-data.sh              ← Trusting Verifier flag (env var)
 │       └── imds-iam-credentials.json      ← bonus Token field (unflipped decoy)
-└── 11-the-proof-locker/
+├── 11-the-proof-locker/
+│   ├── README.md
+│   ├── solve.sh
+│   └── artifacts/
+│       └── etc-passwd-leak.txt            ← opsflag GECOS line at bottom
+└── 12-riffhack-escrow-terminal/
     ├── README.md
-    ├── solve.sh
+    ├── exploit.py
     └── artifacts/
-        └── etc-passwd-leak.txt            ← opsflag GECOS line at bottom
+        └── escrow_terminal                <- original Mach-O ARM64 handout
 ```
 
 ## Running
@@ -148,6 +160,9 @@ RIFFHACK/
 
 # Every challenge against one host
 ./solve-all.sh 159.89.230.27
+
+# Binary exploitation addendum
+python3 ./12-riffhack-escrow-terminal/exploit.py 107.170.63.55 1337
 ```
 
 Most solvers default to `159.89.230.27` if no host is supplied. The named-
@@ -155,5 +170,6 @@ challenge solvers (Night Dump, Proof Stamp) include a fallback to the web3
 SQLi pivot in case the intended endpoint is unhealthy on the deployment
 you're testing against.
 
-Every script prints the recovered flag on the last line, prefixed
-`[+] FLAG: bitflag{...}`.
+The web solvers print the recovered flag on the last line, prefixed
+`[+] FLAG: bitflag{...}`. The escrow exploit prints the remote service output
+after finalizing the trusted dispute vault.
