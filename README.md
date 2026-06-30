@@ -81,3 +81,55 @@ Each writeup is self-contained: brief, reconnaissance, exploitation, root
 cause, mitigation. Where a challenge has a "wrong attractor" I spent time on,
 I leave the dead-end in — partly because the misdirection IS the lesson, and
 partly so future-me can see why I didn't just walk straight to the answer.
+
+## Repository layout
+
+```
+RIFFHACK/
+├── README.md                          ← you are here
+├── 01-web1-robots-txt.md              ← writeups, in solve order
+├── …
+├── 11-the-proof-locker.md
+├── scripts/                           ← runnable solver per challenge
+│   ├── lib/
+│   │   ├── login.sh                   ← get an auth-token cookie (any creds)
+│   │   └── jwt-none.sh                ← forge an alg:none JWT
+│   ├── solve-web1-robots.sh
+│   ├── solve-web2-open-redirect.sh
+│   ├── solve-web3-sqli.sh
+│   ├── solve-web4-coupon.sh
+│   ├── solve-web5-glitchy-contact.sh
+│   ├── solve-web6-review-idor.sh
+│   ├── solve-web7-orders-jwt.sh
+│   ├── solve-night-dump.sh
+│   ├── solve-proof-stamp.sh
+│   ├── solve-trusting-verifier.sh
+│   ├── solve-proof-locker.sh
+│   └── solve-all.sh                   ← run every solver, summarise flags
+└── artifacts/                         ← captures referenced by the writeups
+    ├── README.md
+    ├── db-schema.sql                  ← recovered via web3 SQLi on sqlite_master
+    ├── orders-table-dump.json
+    ├── review-table-dump.json
+    ├── support-chat-dump.json
+    ├── etc-passwd-leak.txt            ← Proof Locker LFI capture
+    ├── imds-user-data.sh              ← Trusting Verifier SSRF capture
+    └── imds-iam-credentials.json      ← bonus IMDS Token field (unflipped decoy)
+```
+
+### Running a solver
+
+```bash
+# Single challenge
+./scripts/solve-web3-sqli.sh 159.89.230.27
+
+# Everything against one host
+./scripts/solve-all.sh 159.89.230.27
+```
+
+Most scripts default to `159.89.230.27` if no host is supplied; the named-
+challenge solvers (Night Dump, Proof Stamp, Trusting Verifier, Proof Locker)
+have a fallback path to the web3 SQLi pivot in case the intended endpoint is
+unhealthy on the deployment you're testing against.
+
+Each script prints the flag it recovered on the last line, prefixed `[+] FLAG:`.

